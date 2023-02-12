@@ -18,6 +18,7 @@ class UpdateSocialProviderUsersTable extends Migration
                 $table->string('avatar')->nullable();
             }
         });
+        if (!Schema::hasTable('social_providers')) {
         Schema::create('social_providers', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
@@ -26,6 +27,7 @@ class UpdateSocialProviderUsersTable extends Migration
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
+      }
     }
 
     /**
